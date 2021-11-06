@@ -43,7 +43,7 @@ def check_attributes (attribute_list):
     return copy_attribute_list
 
 # This is the path to your CSV file (Snyk Dependencies report)
-csv_path = input("Provide the path to you Snyk 'Dependencies' report CSV file: ")
+csv_path = input("Provide the path to your Snyk 'Dependencies' report CSV file: ")
 dependencies_df = pd.read_csv(csv_path)
 dependencies_df = dependencies_df.loc[:,["id","copyright"]]
 
@@ -65,7 +65,7 @@ for dependency in dependencies_attributes_list:
     file.write("\n")
 file.close()
 
-#Create output file (Original list of sopyright attributions)
+#Create output file (Original list of copyright attributions)
 output_filename2 = f'all-attributes-{datetime_as_str()}.txt'
 file2 = open(f'.\\{output_folder_name}\\{output_filename2}',"w")
 for dependency in dependencies_attributes_list:
