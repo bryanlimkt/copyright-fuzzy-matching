@@ -33,7 +33,7 @@ def check_attributes (attribute_list):
     return copy_attribute_list
 
 # This is the path to your CSV file (Snyk Dependencies report)
-csv_path = "C:\\Users\\Bryan\\Downloads\\dependencies-scvjuniorbanking-2021-11-06T02_55_18.126Z.csv"
+csv_path = input("Provide the path to you Snyk 'Dependencies' report CSV file: ")
 dependencies_df = pd.read_csv(csv_path)
 dependencies_df = dependencies_df.loc[:,["id","copyright"]]
 
