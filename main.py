@@ -4,10 +4,12 @@ import ast
 from pathlib import Path
 from datetime import datetime
 
+
 # Generate unique datetime string for filename
 def datetime_as_str():
     now = datetime.now() 
     return now.strftime("%Y%m%d%H%M%S%f")
+
 
 # Checks if two strings are similar. Returns boolean
 def is_same_attribute (attribute1, attribute2):
@@ -47,6 +49,8 @@ Path(f'.\\{output_folder_name}').mkdir(parents=True, exist_ok=True)
 #Create output file (Duplicate attributes removed)
 output_filename = f'no-duplicate-attributes-{datetime_as_str()}.txt'
 file = open(f'.\\{output_folder_name}\\{output_filename}',"w")
+
+
 for dependency in dependencies_attributes_list:
     file.write(dependency[0] + "\n")
     attributes_no_duplicates = check_attributes(ast.literal_eval(dependency[1]))
@@ -58,6 +62,7 @@ file.close()
 #Create output file (Original list of sopyright attributions)
 output_filename2 = f'all-attributes-{datetime_as_str()}.txt'
 file2 = open(f'.\\{output_folder_name}\\{output_filename2}',"w")
+
 for dependency in dependencies_attributes_list:
     file2.write(dependency[0] + "\n")
     attributes = ast.literal_eval(dependency[1])
