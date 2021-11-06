@@ -3,15 +3,25 @@ from fuzzywuzzy import fuzz, process
 import ast
 from pathlib import Path
 from datetime import datetime
+import re
 
 # Generate unique datetime string for filename
 def datetime_as_str():
     now = datetime.now() 
     return now.strftime("%Y%m%d%H%M%S%f")
 
+#Helper function for is_same_attribute function
+def strip_name(attribute):
+    attribute = re.sub("\d\d\d\d","", attribute)
+    attribute = re.sub("<.*>","",attribute)
+    attribute = re.sub(r'\([^()]*\)',"",attribute)
+    return (attribute.replace("Copyright", "").replace("copyright","").replace("(C)","").replace("(c)","")).replace("present","").replace("-","").strip()
+
 # Checks if two strings are similar. Returns boolean
 def is_same_attribute (attribute1, attribute2):
-    return fuzz.token_sort_ratio(attribute1, attribute2) >= 65
+    name1 = strip_name(attribute1)
+    name2 = strip_name(attribute2)
+    return fuzz.token_sort_ratio(name1, name2) >= 50
 
 # Takes in a list of copyright attributes, returns a list with duplicate attributes removed
 def check_attributes (attribute_list):
